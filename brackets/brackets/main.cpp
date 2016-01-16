@@ -49,9 +49,12 @@ int main(int argc, const char * argv[]) {
         brackets.push_back(c);
     }
     
-    for (int i = 0; i < brackets.size(); i++) {
-        std::cout << brackets[i] << " ";
-    }
+    char* stackLeftBrackets = new char[bufferSize];
+    char* stackRightBrackets = new char[bufferSize];
+    
+//    for (int i = 0; i < brackets.size(); i++) {
+//        std::cout << brackets[i] << " ";
+//    }
     
     return 0;
 }
