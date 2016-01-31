@@ -1,15 +1,23 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <cstdlib>
 
-long partion(long* array, long n)
+static int a[ 2000000 ] = {0};
+
+int compare(const void * x1, const void * x2)
+{
+    return ( *(int*)x1 - *(int*)x2 );
+}
+
+int partion(int* array, int n)
 {
     if ( n <= 1 ) {
         return 0;
     }
-    const long& pivot = array[n - 1];
-    long i = 0;
-    long j = n - 2;
+    const int& pivot = array[n - 1];
+    int i = 0;
+    int j = n - 2;
     while (i <= j) {
         for (; array[i] < pivot; ++i){}
         for (; j >= 0 && !(array[j] < pivot); --j){}
@@ -23,9 +31,9 @@ long partion(long* array, long n)
     return i;
 }
 
-void quickSort(long* array, long n)
+void quickSort(int* array, int n)
 {
-    long part = partion(array, n);
+    int part = partion(array, n);
     if (part > 0) {
         quickSort(array, part);
     }
@@ -35,27 +43,17 @@ void quickSort(long* array, long n)
 }
 int main(int argc, const char * argv[]) {
     
-    std::vector<long> array;
-    long tmp;
+    int num_input = 0;
+    int number;
     
-    std::string line;
-    getline(std::cin, line);
-    std::istringstream iss(line);
-    while (iss >> tmp)
-    {
-        array.push_back(tmp);
+    while( fscanf( stdin, "%d", &number ) != '\0') {
+        a[ num_input++ ] = number;
     }
     
-    long n = array.size();
-    long* a = new long[n];
-    for (long i = 0 ; i < n; i++)
-        a[i] = array[i];
+    quickSort(a, num_input);
     
-    quickSort(a, n);
-    for (long i = 0; i < n; i++) {
-        if ((i + 1)  % 10 == 0) {
+    for (int i = 9; i < num_input; i+= 10) {
             std::cout << a[i] << " ";
-        }
     }
    
     return 0;
